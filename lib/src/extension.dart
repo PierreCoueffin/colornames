@@ -1,4 +1,5 @@
 import 'package:colornames/src/color_names.dart';
+import 'package:colornames/src/color_names_list.dart';
 import 'package:flutter/painting.dart';
 
 extension ColorNamesForColor on Color {
@@ -15,4 +16,10 @@ extension ColorNamesForInt on int {
   String get colorName {
     return ColorNames.guess(Color(this));
   }
+}
+
+extension ColorByNameForString on String {
+  Color get getColor => ColorNamesList.namesMap.keys.firstWhere(
+    (k) => ColorNamesList.namesMap[k] == this,
+    orElse: () => null);
 }
