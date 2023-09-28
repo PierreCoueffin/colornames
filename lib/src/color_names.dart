@@ -33,7 +33,7 @@ abstract class ColorNames {
     var code = ColorNamesList.namesMap.keys.firstWhere(
       (k) => ColorNamesList.namesMap[k] == name,
       orElse: () => null);
-    }
+      
     if (null == code) {
       // Did not find it in the map.  Maybe it is a hex code?
       if (RegExp(r'^(0x)?[0-9a-fA-F]{6,8}$').hasMatch(name)) {
@@ -60,4 +60,5 @@ abstract class ColorNames {
         int.parse(code.substring(8, 10), radix:16),
       );
     }
+  }
 }
