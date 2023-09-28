@@ -43,13 +43,13 @@ abstract class ColorNames {
             // it as 100% opacity.
             c = c.withOpacity(1.0);
           }
-          return c;
+          return c.value;
         } else {
           // I'm going to *not* throw an exception here, even though that is probably the right thing to do.
           //throw FormatException("The specified color $name did not match any known colors.");
           // Instead, I'm going to log a warning and return black as the default color.
           debugPrint("The specified color $name did not match any known colors. I'm going to substitute black and keep on trucking.");
-          return Colors.black;
+          return Colors.black.value;
         }
     });
     
