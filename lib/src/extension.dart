@@ -19,7 +19,5 @@ extension ColorNamesForInt on int {
 }
 
 extension ColorByNameForString on String {
-  Color get getColor => ColorNamesList.namesMap.keys.firstWhere(
-    (k) => ColorNamesList.namesMap[k] == this,
-    orElse: () => null);
+  Color get getColorByName => ColorNames.getColorByName(this);
 }

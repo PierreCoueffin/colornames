@@ -28,4 +28,36 @@ abstract class ColorNames {
     if (foundColor != null) return ColorNamesList.namesMap[foundColor]!;
     return "Color_${color.value.toRadixString(16)}";
   }
+
+  static Color getColorByName(String name) {
+    var code = ColorNamesList.namesMap.keys.firstWhere(
+      (k) => ColorNamesList.namesMap[k] == name,
+      orElse: () => null);
+    }
+    if (null == code) {
+      // Did not find it in the map.  Maybe it is a hex code?
+      if (RegExp(r'^(0x)?[0-9a-fA-F]{6,8}$').hasMatch(name)) {
+        var c = Color(int.parse(name));
+        if (RegExp(r'(0x)?[0-9a-fA-F]{6}$').hasMatch(name)) {
+          // Alpha was unspecified, which Dart will take to mean 0% opacity.
+          // This is incredibly stupid.  Any sane implementation would treat
+          // it as 100% opacity.
+          c = c.withOpacity(1.0);
+        }
+        return c;
+      } else {
+        // I'm going to *not* throw an exception here, even though that is probably the right thing to do.
+        //throw FormatException("The specified color $name did not match any known colors.");
+        // Instead, I'm going to log a warning and return black as the default color.
+        debugPrint("The specified color $name did not match any known colors. I'm going to substitute black and keep on trucking.");
+        return Colors.black;
+      }
+    } else {
+      return Color.fromARGB(
+        255,
+        int.parse(code.substring(4,  6), radix:16),
+        int.parse(code.substring(6,  8), radix:16),
+        int.parse(code.substring(8, 10), radix:16),
+      );
+    }
 }
