@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flutter/material.dart';
 import 'package:colornames/src/color_value_vo.dart';
 import 'color_names_list.dart';
 
@@ -30,8 +31,8 @@ abstract class ColorNames {
   }
 
   static Color getColorByName(String name) {
-    var code = ColorNamesList.namesMap.keys.firstWhere(
-      (k) => ColorNamesList.namesMap[k] == name,
+    var code = ColorNamesList.intMap.keys.firstWhere(
+      (k) => ColorNamesList.intMap[k] == name,
       orElse: () => null);
       
     if (null == code) {
